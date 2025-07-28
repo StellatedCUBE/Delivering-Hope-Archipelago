@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyName>ClientPlugin</AssemblyName>
+    <Product>My first plugin</Product>
+    <Version>1.0.0</Version>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>latest</LangVersion>
+    <RestoreAdditionalProjectSources>
+      https://api.nuget.org/v3/index.json;
+      https://nuget.bepinex.dev/v3/index.json;
+      https://nuget.samboy.dev/v3/index.json
+    </RestoreAdditionalProjectSources>
+    <RootNamespace>ClientPlugin</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.*" IncludeAssets="compile" />
+    <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+<Reference Include="Archipelago.MultiClient.Net">
+  <HintPath>Archipelago.MultiClient.Net-Newtonsoftless/Archipelago.MultiClient.Net/bin/Release/net6.0/publish/Archipelago.MultiClient.Net.dll</HintPath>
+</Reference>
+
+<Reference Include="Assembly-CSharp">
+  <HintPath>{interopdir}/Assembly-CSharp.dll</HintPath>
+</Reference>
+<Reference Include="Il2Cppmscorlib">
+  <HintPath>{interopdir}/Il2Cppmscorlib.dll</HintPath>
+</Reference>
+<Reference Include="UnityEngine.CoreModule">
+  <HintPath>{interopdir}/UnityEngine.CoreModule.dll</HintPath>
+</Reference>
+<Reference Include="UnityEngine.ImageConversionModule">
+  <HintPath>{interopdir}/UnityEngine.ImageConversionModule.dll</HintPath>
+</Reference>
+<Reference Include="UnityEngine.UI">
+  <HintPath>{interopdir}/UnityEngine.UI.dll</HintPath>
+</Reference>
+<Reference Include="UnityEngine.UIElementsModule">
+  <HintPath>{interopdir}/UnityEngine.UIElementsModule.dll</HintPath>
+</Reference>
+<Reference Include="UnityEngine.UIModule">
+  <HintPath>{interopdir}/UnityEngine.UIModule.dll</HintPath>
+</Reference>
+<Reference Include="Unity.TextMeshPro">
+  <HintPath>{interopdir}/Unity.TextMeshPro.dll</HintPath>
+</Reference>
+
+  </ItemGroup>
+</Project>
