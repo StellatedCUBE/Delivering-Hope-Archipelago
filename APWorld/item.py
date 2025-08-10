@@ -61,6 +61,8 @@ class DHItem:
 				if sub_id < 100:
 					self.name = f'starting "{sub_name}" level'
 					self.ap_class = ItemClassification.filler
+				elif sub_id == 100:
+					self.ap_class = ItemClassification.progression
 
 			case DHItemType.FILLER:
 				self.ap_class = ItemClassification.filler

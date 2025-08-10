@@ -264,7 +264,7 @@ dh_locations = [
 		for i in range(5)
 	),
 	*(
-		DHLocation(DHLocationType.FUSION, i, name, True, [DHObject.MORI, (DHObject.MUMEI, DHObject.KRONII), part1, part2, DHAbility.BEACH if beach else None])
+		DHLocation(DHLocationType.FUSION, i, name, True, [DHObject.MORI, (DHObject.MUMEI, DHObject.KRONII), DHAbility.FUSION, part1, part2, DHAbility.BEACH if beach else None])
 		for i, name, part1, part2, beach in (
 			(22, "Takamori", DHObject.MORI, DHObject.KIARA, False),
 			(23, "Kronmei", DHObject.KRONII, DHObject.MUMEI, False),

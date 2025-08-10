@@ -73,7 +73,8 @@ class DHWorld(World):
 		]
 	
 	def create_items(self) -> None:
-		locations = self.create_locations()
+		self.create_locations()
+		locations = self.location_names
 
 		item_pool = self.create_primary_item_pool()
 
@@ -232,7 +233,7 @@ class DHWorld(World):
 				ap_location.access_rule = rule
 			region.locations.append(ap_location)
 
-		return [
+		self.location_names = [
 			location.name
 			for location in enabled
 		]
@@ -243,6 +244,11 @@ class DHWorld(World):
 			return self.cosmetic_pool.pop(self.random.randrange(len(self.cosmetic_pool)))
 		else:
 			return self.random.choice(self.filler_items)
+
+	def set_rules(self) -> None:
+		locations = self.location_names
+		p = self.player
+		self.multiworld.completion_condition[self.player] = lambda state: all(state.can_reach_location(l, p) for l in locations)
 	
 	def fill_slot_data(self) -> Dict[str, Any]:
 		game_id = ''

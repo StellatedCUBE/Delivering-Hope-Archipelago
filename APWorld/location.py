@@ -15,6 +15,8 @@ def build_requirement(requirement: Any) -> List[int]:
 	if isinstance(requirement, DHRegion):
 		return [item_id(DHItemType.GAME_MODE, requirement)]
 	if isinstance(requirement, DHObject):
+		if requirement == DHObject.STRAWBERRY:
+			return [item_id(DHItemType.OBJECT, requirement), (DHItemType.PROGRESSIVE.value << 8) | 100]
 		return [item_id(DHItemType.OBJECT, requirement)]
 	if isinstance(requirement, DHAbility):
 		return [item_id(DHItemType.ABILITY, requirement)]
