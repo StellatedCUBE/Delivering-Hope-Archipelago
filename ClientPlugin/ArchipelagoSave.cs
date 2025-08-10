@@ -16,6 +16,7 @@ public class ArchipelagoSave {
 	//public int freeSpaceFlights = 0;
 	public bool[] spaceItemsSent = new bool[5];
 	public int queuedHopeStones = 0;
+	public float HSOverflow;
 	public float bestDistanceStandard = 0;
 	public float bestDistanceClassic = 0;
 	public float bestDistanceBaeless = 0;

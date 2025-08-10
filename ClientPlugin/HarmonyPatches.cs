@@ -18,12 +18,12 @@ static class HarmonyPatches {
 	[HarmonyPatch(typeof(SpawnSequencer), "GetNextObstacle")]
 	[HarmonyPrefix]
 	static bool ObjectSpawner(SpawnSequencer __instance, ref SpawnSequencer.SequenceItem __result, int chunkNumber, GameZone zone) {
-
+		/*
 		if (!Plugin.o1pd) {
 			Plugin.o1pd = true;
 			Plugin.On1Play();
 		}
-
+		*/
 		Plugin.SetSpaceItemMode(SpaceItemMode.Received);
 
 		var mode = GameManager.Instance.CurrentGameMode;
@@ -562,7 +562,11 @@ static class HarmonyPatches {
 	[HarmonyPatch(typeof(PlayScreenManager), "CheckEndGameAchievements")]
 	[HarmonyPostfix]
 	static void CheckSendDeathLink() {
-		if (ArchipelagoState.current.deathLinkConnected && !PlayScreenManager.Instance.isBaelessTimeup) {
+		if (
+			ArchipelagoState.current.deathLinkConnected &&
+			!PlayScreenManager.Instance.isBaelessTimeup &&
+			GameManager.Instance.currentGameMode != GameMode.TheCell
+		) {
 			foreach (var pair in GamesaveHandler.Instance.achievementsUnlocked)
 				if (pair.Value && pair.Key < AchievementID.SUPER_DivorcePapers)
 					achievements--;
@@ -718,4 +722,35 @@ static class HarmonyPatches {
 	[HarmonyPostfix]
 	static void UpdateSpaceDistance(SpaceWaveManager __instance) =>
 		ArchipelagoState.current.save.UpdateDistanceRecord(GameMode.Space, __instance.thisFlightTime * __instance.distMulti);
+	
+	/*[HarmonyPatch(typeof(GamesaveHandler), "SetCurrency")]
+	[HarmonyPrefix]
+	static void MultiplyHS(GamesaveHandler __instance, ref int value) {
+		if (!ArchipelagoState.current.flushingStones) {
+			int old = __instance.GetCurrency();
+			if (value > old) {
+				int gain = value - old;
+				float newGain = gain * ArchipelagoState.current.slotData.HSMult + ArchipelagoState.current.save.HSOverflow;
+				value = old + (int)newGain;
+				ArchipelagoState.current.save.HSOverflow = newGain - (int)newGain;
+			}
+		}
+	}*/
+
+	[HarmonyPatch(typeof(SpaceWheel), "GiveReward")]
+	[HarmonyPrefix]
+	static void MultiplyHSSpace(WheelOption option) {
+		if (option == WheelOption.HOPESTONES) {
+			GamesaveHandler.Instance.SetCurrency(
+				GamesaveHandler.Instance.GetCurrency() - 5 + Mathf.RoundToInt(ArchipelagoState.current.slotData.HSMult * 5), false);
+		}
+	}
+
+	[HarmonyPatch(typeof(CurrencyUI), "AddCurrency")]
+	[HarmonyPrefix]
+	static void MultiplyHS(ref int amount) {
+		var @new = amount * ArchipelagoState.current.slotData.HSMult + ArchipelagoState.current.save.HSOverflow;
+		amount = (int)@new;
+		ArchipelagoState.current.save.HSOverflow = @new - amount;
+	}
 }

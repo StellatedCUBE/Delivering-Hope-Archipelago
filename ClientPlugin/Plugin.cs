@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
 using System.Linq;
+using Archipelago.MultiClient.Net.Json;
 
 namespace ClientPlugin;
 
@@ -34,19 +35,17 @@ public class Plugin : BasePlugin
         archipelagoIcon = Sprite.Create(iconTexture, new(0, 0, iconTexture.width, iconTexture.height), new());
     }
 
-    internal static bool o1pd = true;
+    /*
+    internal static bool o1pd = false;
     public static void On1Play() {
         static string TL(string key) => Translator.Instance.GetLocalized(key);
         //static string TLA(IEnumerable<string> keys) => string.Join("//", keys.Select(TL));
 
-        StringBuilder dump = new();
-
-        foreach (var pu in PowerupManager.Instance.GetAllPowerups().OrderBy(p => (int)p.UpgradeId)) {
-            dump.AppendLine($"    DHItem(DHItemType.PROGRESSIVE, ({(int)pu.UpgradeId}, \"{TL(pu.Title)}\"), {pu.MaxLevel - 1}),");
-        }
-
-        File.WriteAllText("z:\\tmp\\dh_dump", dump.ToString());
-    }
+        Dictionary<string, string> map = new();
+        foreach (var key in Translator.Instance.localizedTexts.Keys)
+            map.Add(key, TL(key));
+        File.WriteAllText("z:\\tmp\\dh_dump", JObject.FromObject(map).ToJSON());
+    }*/
 
     internal static void Tick() {
         tickers.AddRange(tickersToAdd);

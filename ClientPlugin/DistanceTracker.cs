@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace ClientPlugin;
 
 class DistanceTracker : Ticker {

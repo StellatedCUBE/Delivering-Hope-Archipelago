@@ -31,6 +31,7 @@ class ArchipelagoState : Ticker {
 	public bool shopUnlocked = false;
 	public bool labUnlocked = false;
 	public bool deathLinkConnected = false;
+	//public bool flushingStones = false;
 	public int asteroidHitTime = 0;
 	bool shownDisconnectMessage = false;
 	bool initialChecksSent = false;
@@ -74,7 +75,9 @@ class ArchipelagoState : Ticker {
 		
 		if (!initialChecksSent) {
 			initialChecksSent = true;
+
 			Locations.Scout(session);
+
 			if (deathLinkEnabled = save.deathLink ?? deathLinkEnabled) {
 				deathLink = session.CreateDeathLinkService();
 				deathLink.OnDeathLinkReceived += data => {
@@ -82,6 +85,14 @@ class ArchipelagoState : Ticker {
 					incomingDeathLink = true;
 				};
 			}
+
+			var l10n = Translator.Instance.localizedTexts;
+			var tl = l10n["WHEEL_RESULT_HOPESTONE"];
+			for (int i = 0; i < tl.Length; i++)
+				tl[i] = tl[i].Replace("5", Mathf.RoundToInt(slotData.HSMult * 5).ToString());
+			tl = l10n["UI_POWERUP_MAT_HOPESTONE_D"];
+			for (int i = 0; i < tl.Length; i++)
+				tl[i] = tl[i].Replace("500", Mathf.RoundToInt(slotData.HSMult * 500).ToString());
 		}
 
 		if (!session.Socket.Connected && !shownDisconnectMessage && Plugin.archipelagoIcon) {
@@ -251,9 +262,11 @@ class ArchipelagoState : Ticker {
 
 	public void FlushStoneQueue() {
 		if (Plugin.spaceItemMode == SpaceItemMode.Sent && save.queuedHopeStones > 0) {
+			//flushingStones = true;
 			GamesaveHandler.Instance.SetCurrency(GamesaveHandler.Instance.GetCurrency() + save.queuedHopeStones, false);
 			save.queuedHopeStones = 0;
 			save.dirty = true;
+			//flushingStones = false;
 		}
 	}
 

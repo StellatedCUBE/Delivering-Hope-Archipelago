@@ -23,6 +23,7 @@ A single install can handle playing in multiple different Archipelago games at t
 ## Connecting
 
 When the game loads, a popup will open prompting you to enter the connection details for your Archipelago game.
+On Linux, this can sometimes take a while.
 
 ## Resuming
 

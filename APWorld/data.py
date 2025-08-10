@@ -241,7 +241,7 @@ dh_locations = [
 				("Feeling Lucky", True, DHRegion.GACHA),
 				("Incredible Luck!", True, DHRegion.GACHA),
 				("Sixth sense", True, DHRegion.GACHA),
-				("Perfect Yeet!", True),
+				("Perfect Yeet!", False),
 				("Beyond the Clouds", True, (DHObject.MUMEI, DHObject.KRONII)),
 				("DizzyRyS", True, DHObject.GURA, DHAbility.BEACH),
 				("Inaception", True, DHObject.INA, DHAbility.BEACH),

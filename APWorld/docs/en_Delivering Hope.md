@@ -53,3 +53,20 @@ If they occur in the Phoenix Shop or in Space mode, other games' items will look
 ## When the player receives an item, what happens?
 
 It will be displayed as a popup in the lower left corner of the screen, the same as cosmetic unlocks.
+
+## What counts as a death for the purpose of Death Link?
+
+The following events will trigger a Death Link:
+- Hitting Bae (without a blocking item or Rebirth)
+- Stopping (without a Last Hope, and not in The Cell)
+- Running out of fuel in Space mode
+
+If the death is required to get a check (for example, Gravity) then a Death Link will not be sent.
+
+## What happens when a Death Link is received?
+
+If the player is in a "normal" game mode, IRyS will stop and fall, as if she hit Bae.
+
+If the player is in Space mode, they will instantly lose all their fuel.
+
+If the player is in a menu, nothing happens.

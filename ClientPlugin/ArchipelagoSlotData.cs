@@ -5,6 +5,7 @@ public class ArchipelagoSlotData {
 	public bool cosmeticsAreItems;
 	public bool deathLink;
 	public float spaceMult;
+	public float HSMult;
 	public bool rebirthBlocksDeathLink;
 	public float goalStandardDistance;
 	public float goalClassicDistance;

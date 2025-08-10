@@ -255,6 +255,7 @@ class DHWorld(World):
 			deathLink = self.options.death_link.value,
 			rebirthBlocksDeathLink = self.options.death_link_blockable.value,
 			spaceMult = self.options.space_speed_multiplier.value / 100,
+			HSMult = self.options.hope_stones_multiplier.value / 100,
 			goalStandardDistance = self.options.goal_standard.value,
 			goalClassicDistance = self.options.goal_classic.value,
 			goalBaelessDistance = self.options.goal_baeless.value,

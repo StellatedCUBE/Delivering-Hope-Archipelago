@@ -74,6 +74,14 @@ class SpaceSpeedMultiplier(Range):
 	range_start = 10
 	range_end = 2000
 
+class HopeStonesMultiplier(Range):
+	"""Increase (or decrease) the amount of Hope Stones granted as in-game rewards.
+	Does not affect Hope Stones given over Archipelago.."""
+	display_name = "Hope Stone Multiplier (%)"
+	default = 100
+	range_start = 10
+	range_end = 1000
+
 class GoalStandardDistance(Range):
 	"""The required distance to be achieved in “Standard” mode to reach the goal state."""
 	display_name = "“Standard” Distance (m)"
@@ -141,6 +149,7 @@ class DHOptions(PerGameCommonOptions):
 	death_link: DeathLink
 	death_link_blockable: DeathLinkBlockable
 	space_speed_multiplier: SpaceSpeedMultiplier
+	hope_stones_multiplier: HopeStonesMultiplier
 	
 	# Locations
 	achievement_checks: AchievementChecks
@@ -168,7 +177,8 @@ dh_option_groups = [
 	OptionGroup("Game Options", [
 		DeathLink,
 		DeathLinkBlockable,
-		SpaceSpeedMultiplier
+		SpaceSpeedMultiplier,
+		HopeStonesMultiplier
 	]),
 	OptionGroup("Checks", [
 		AchievementChecks,
