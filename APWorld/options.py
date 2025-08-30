@@ -76,7 +76,7 @@ class SpaceSpeedMultiplier(Range):
 
 class HopeStonesMultiplier(Range):
 	"""Increase (or decrease) the amount of Hope Stones granted as in-game rewards.
-	Does not affect Hope Stones given over Archipelago.."""
+	Does not affect Hope Stones given over Archipelago."""
 	display_name = "Hope Stone Multiplier (%)"
 	default = 100
 	range_start = 10
@@ -174,12 +174,6 @@ class DHOptions(PerGameCommonOptions):
 	start_inventory_from_pool: StartInventoryPool
 
 dh_option_groups = [
-	OptionGroup("Game Options", [
-		DeathLink,
-		DeathLinkBlockable,
-		SpaceSpeedMultiplier,
-		HopeStonesMultiplier
-	]),
 	OptionGroup("Checks", [
 		AchievementChecks,
 		FusionChecks

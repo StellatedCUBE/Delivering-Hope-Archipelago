@@ -13,7 +13,7 @@ When doing this, you may need to set the environment variable `WINEDLLOVERRIDES`
 
 ## Installation Procedure
 
-The following steps need to be completen only once, even when playing multiple Archipelago games.
+The following steps need to be completed only once, even when playing multiple Archipelago games.
 A single install can handle playing in multiple different Archipelago games at the same time.
 
 - If you already have a local install of Delivering Hope, copy it to create a new one, as to not interfere with your regular game.

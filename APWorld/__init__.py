@@ -55,6 +55,16 @@ class DHWorld(World):
 		self.cosmetic_pool = self.create_cosmetic_item_pool()
 		self.made_cosmetic_filler = False
 
+		self.distances = {
+			DHRegion.MENU: max(self.options.goal_standard.value, self.options.goal_classic.value),
+			DHRegion.BAELESS: self.options.goal_baeless.value,
+			DHRegion.GACHA: self.options.goal_gacha.value
+		}
+
+		for location in dh_locations:
+			if location.type == DHLocationType.ACHIEVEMENT and location.sub_name in self.options.goal_achievements:
+				self.distances[location.region] = max(self.distances.get(location.region, 0), location.distance)
+
 	def create_item(self, name: str) -> DHAPItem:
 		return DHAPItem(name, dh_item_name_to_object[name].ap_class, dh_item_name_to_object[name].id, self.player)
 	
@@ -108,6 +118,8 @@ class DHWorld(World):
 				self.early(self.random.choice(starting_boosters[1:]))
 			else:
 				self.early(DHObject.MORI)
+
+		self.early(DHAbility.DOWNBOOST)
 
 		if DHObject.STRAWBERRY.name() in precollected:
 			item_pool.append('double strawberry')
@@ -224,7 +236,9 @@ class DHWorld(World):
 		for location in enabled:
 			region = self.get_region(location.region.name())
 			ap_location = DHAPLocation(self.player, location.name, location.id, region)
-			if location.priority:
+			if location.distance > self.distances.get(location.region, 0):
+				ap_location.progress_type = LocationProgressType.EXCLUDED
+			elif location.priority:
 				ap_location.progress_type = LocationProgressType.PRIORITY
 			if location.type == DHLocationType.SHOP:
 				ap_location.item_rule = lambda item: item.game != GAME or 'Hope Stone' not in item.name

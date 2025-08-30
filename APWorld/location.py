@@ -48,6 +48,7 @@ class DHLocation:
 	default: bool
 	item_requirements: List[List[int]]
 	priority: bool
+	distance: int
 	
 	def __init__(self, type_: DHLocationType, sub_id: int, sub_name: str, default: bool, requirements: List[Any]):
 		self.type = type_
@@ -56,6 +57,7 @@ class DHLocation:
 		self.region = DHRegion.MENU
 		self.default = default
 		self.priority = False
+		self.distance = 0
 
 		match type_:
 			case DHLocationType.ACHIEVEMENT:
@@ -71,7 +73,9 @@ class DHLocation:
 
 		self.item_requirements = []
 		for requirement in requirements:
-			if isinstance(requirement, DHRegion) and self.region == DHRegion.MENU:
+			if isinstance(requirement, int):
+				self.distance = requirement
+			elif isinstance(requirement, DHRegion) and self.region == DHRegion.MENU:
 				self.region = requirement
 			elif requirement is not None:
 				self.item_requirements.append(build_requirement(requirement))
