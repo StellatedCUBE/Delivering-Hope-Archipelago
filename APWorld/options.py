@@ -85,7 +85,7 @@ class HopeStonesMultiplier(Range):
 class GoalStandardDistance(Range):
 	"""The required distance to be achieved in “Standard” mode to reach the goal state."""
 	display_name = "“Standard” Distance (m)"
-	default = 100000
+	default = 30000
 	range_start = 0
 	range_end = 150000
 
@@ -108,7 +108,7 @@ class GoalGachaDistance(Range):
 	display_name = "“Gacha” Distance (m)"
 	default = 0
 	range_start = 0
-	range_end = 150000
+	range_end = 50000
 
 class GoalTheCellTime(Range):
 	"""The required time for “The Cell” mode to be beaten in to reach the goal state.

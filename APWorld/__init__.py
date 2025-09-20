@@ -99,6 +99,12 @@ class DHWorld(World):
 			DHObject.KRONII.name()
 		]
 
+		beach_boosters = [
+			DHObject.GURA.name(),
+			DHObject.INA.name(),
+			DHObject.FAUNA.name()
+		]
+
 		precollected = {
 			item.name
 			for item in self.multiworld.precollected_items[self.player]
@@ -118,6 +124,9 @@ class DHWorld(World):
 				self.early(self.random.choice(starting_boosters[1:]))
 			else:
 				self.early(DHObject.MORI)
+
+		if not any(booster in precollected for booster in beach_boosters):
+			self.early(self.random.choice(beach_boosters))
 
 		self.early(DHAbility.DOWNBOOST)
 
